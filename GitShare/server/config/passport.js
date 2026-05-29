@@ -1,11 +1,7 @@
 import passport from 'passport';
 import { Strategy as GitHubStrategy } from 'passport-github2';
 import User from '../models/User.js';
-import {
-  GITHUB_CALLBACK_URL,
-  GITHUB_CLIENT_ID,
-  GITHUB_CLIENT_SECRET
-} from '../config.js';
+import '../config.js';
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
@@ -20,9 +16,9 @@ passport.deserializeUser(async (id, done) => {
   }
 });
 
-const clientID = GITHUB_CLIENT_ID;
-const clientSecret = GITHUB_CLIENT_SECRET;
-const callbackURL = GITHUB_CALLBACK_URL;
+const clientID = process.env.GITHUB_CLIENT_ID;
+const clientSecret = process.env.GITHUB_CLIENT_SECRET;
+const callbackURL = process.env.GITHUB_CALLBACK_URL;
 
 if (!clientID || !clientSecret) {
   console.warn('⚠️ Warning: GITHUB_CLIENT_ID or GITHUB_CLIENT_SECRET is missing in environment variables. GitHub OAuth will not function correctly.');

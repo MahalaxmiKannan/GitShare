@@ -1,6 +1,5 @@
 import express from 'express';
 import passport from 'passport';
-import { CLIENT_URL } from '../config.js';
 
 const router = express.Router();
 
@@ -11,10 +10,10 @@ router.get('/github', passport.authenticate('github', { scope: ['user:email', 'r
 // @desc    GitHub auth callback
 // @route   GET /auth/github/callback
 router.get('/github/callback', 
-  passport.authenticate('github', { failureRedirect: `${CLIENT_URL}/?auth_error=true` }),
+  passport.authenticate('github', { failureRedirect: `${process.env.CLIENT_URL}/?auth_error=true` }),
   (req, res) => {
     // Successful authentication, redirect to frontend.
-    res.redirect(CLIENT_URL);
+    res.redirect(process.env.CLIENT_URL);
   }
 );
 
@@ -42,10 +41,10 @@ router.get('/logout', (req, res, next) => {
           console.error('Error destroying session during logout:', err);
         }
         res.clearCookie('connect.sid');
-        res.redirect(CLIENT_URL);
+        res.redirect(process.env.CLIENT_URL);
       });
     } else {
-      res.redirect(CLIENT_URL);
+      res.redirect(process.env.CLIENT_URL);
     }
   });
 });
