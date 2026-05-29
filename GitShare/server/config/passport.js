@@ -1,7 +1,6 @@
 import passport from 'passport';
 import { Strategy as GitHubStrategy } from 'passport-github2';
 import User from '../models/User.js';
-import '../config.js';
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
