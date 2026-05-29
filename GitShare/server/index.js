@@ -14,14 +14,29 @@ import githubRouter from './routes/github.js';
 
 const app = express();
 
+const allowedOrigins = [
+  CLIENT_URL,
+  'https://gitshareio.netlify.app',
+  'http://localhost:5173'
+].filter(Boolean);
+
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+      return;
+    }
+
+    callback(new Error(`CORS blocked for origin: ${origin}`));
+  },
+  credentials: true
+};
+
 // Connect to Database
 connectDB();
 
 // Middleware
-app.use(cors({
-  origin: CLIENT_URL,
-  credentials: true
-}));
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // Session configuration
@@ -67,7 +82,7 @@ app.use('/github', githubRouter);
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
   cors: {
-    origin: CLIENT_URL,
+    origin: allowedOrigins,
     methods: ['GET', 'POST'],
     credentials: true
   }

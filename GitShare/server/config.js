@@ -20,5 +20,5 @@ export const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID || '';
 export const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET || '';
 export const GITHUB_CALLBACK_URL = normalizeUrl(
   process.env.GITHUB_CALLBACK_URL,
-  'http://localhost:5000/auth/github/callback'
+  'https://gitshare-fjyv.onrender.com/auth/github/callback'
 );

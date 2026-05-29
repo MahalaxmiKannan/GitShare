@@ -82,6 +82,7 @@ function findPeakElement(nums) {
 
 // Example usage
 const peakIndex = findPeakElement([1, 2, 3, 1]);`);
+  const GITHUB_LOGIN_URL = 'https://gitshare-fjyv.onrender.com/auth/github';
 
   // Add system logs
   const addLog = (text, type = 'info') => {
@@ -364,7 +365,7 @@ const peakIndex = findPeakElement([1, 2, 3, 1]);`);
             </div>
           ) : (
             <a
-              href={`${BACKEND_URL}/auth/github`}
+              href={GITHUB_LOGIN_URL}
               className="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 transition duration-200 text-xs font-semibold text-slate-300 border border-slate-700/60"
             >
               <Github className="w-4 h-4" />
